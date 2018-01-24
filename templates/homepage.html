@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+    <title>Homepage</title>
+</head>
+<body>
+    <h1> This is a homepage </h1>
+        <h2> Student list </h2>
+            <div class='students'>
+            {% for first, last, github in students %}
+            <ul>
+                 <li>{{ first }} {{ last }} [ github account: <a href='/student?github={{ github }}'>{{ github }}</a> ]</li>
+            </ul>
+            </div>
+            {% endfor %}
+        <h2> Project list </h2>
+          <div class='projects'>
+            {% for title, description, max_grade in projects %}
+            <ul>
+              <li> <a href='/project/{{title}}'>{{title}} </a>: {{ description }} [ max_grade: {{ max_grade }} ]</li>
+            </ul>
+          </div>
+            {% endfor %}
+
+
+
+
+</body>
+</html>

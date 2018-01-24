@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+    <title>Create Student data</title>
+</head>
+
+<body>
+
+  <form action="/assign-grades", method='POST'>
+    <label>choose student name:
+
+        <select name='github'>
+        {% for first, last, github in students %}
+          <option value='{{ github }}'>
+          {{ first }} {{ last }} : {{github}}
+          </option>
+          {% endfor %}
+        </select>
+
+    </label><br>
+    <label>choose project name:
+
+        <select name='title'>
+        {% for title, description, max_grade in projects %}
+          <option value='{{ title }}'>
+          {{ title }}
+          </option>
+          {% endfor %}
+        </select>
+
+    </label><br>
+    <label>Assign the grade:
+        <input type="text" name="grade">
+
+    </label><br>
+
+
+    <br><input type="submit" value="Assign grade">
+  </form>
+
+</body>
+</html>

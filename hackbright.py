@@ -31,6 +31,7 @@ def get_all_students():
 
     return students
 
+
 def get_all_projects():
 
     QUERY = """
@@ -42,6 +43,7 @@ def get_all_projects():
     projects = db_cursor.fetchall()
 
     return projects
+
 
 def get_student_by_github(github):
     """Given a GitHub account name, print info about the matching student."""
@@ -81,6 +83,27 @@ def make_new_student(first_name, last_name, github):
 
     print "Successfully added student: {first} {last}".format(
         first=first_name, last=last_name)
+
+
+def make_new_project(title, description, max_grade):
+    """Add a new student and print confirmation.
+
+    Given a first name, last name, and GitHub account, add student to the
+    database and print a confirmation message.
+    """
+
+    QUERY = """
+        INSERT INTO projects (title, description, max_grade)
+          VALUES (:title, :description, :max_grade)
+        """
+
+    db.session.execute(QUERY, {'title': title,
+                               'description': description,
+                               'max_grade': max_grade})
+    db.session.commit()
+
+    print "Successfully added project"
+
 
 
 def get_project_by_title(title):

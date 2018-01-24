@@ -1,6 +1,6 @@
 """A web application for tracking projects, students, and student grades."""
 
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, redirect
 
 import hackbright
 
@@ -61,6 +61,51 @@ def show_new_student():
         first_name=first_name, last_name=last_name,github=github)
 
 
+@app.route("/create-project", methods=['GET'])
+def create_project_form():
+    """Show form for adding a project."""
+
+    return render_template('create-project.html')
+
+
+@app.route("/create-project", methods=['POST'])
+def show_new_project():
+    """Show form for searching for a project."""
+
+    title = request.form.get('title')
+    description = request.form.get('description')
+    max_grade = request.form.get('max_grade')
+
+    hackbright.make_new_project(title, description, max_grade)
+
+    return redirect('/project/' + title)
+
+
+@app.route("/assign-grades", methods=['GET'])
+def show_grades_form():
+    """Show form for adding a grade to a project."""
+
+    students = hackbright.get_all_students()
+
+    projects = hackbright.get_all_projects()
+
+    return render_template('assign-grades.html', students=students,
+        projects=projects)
+
+
+@app.route("/assign-grades", methods=['POST'])
+def post_grades():
+    """Assign new grades to the hackbright db"""
+
+    grade = request.form.get('grade')
+    title = request.form.get('title')
+    github = request.form.get('github')
+
+    hackbright.assign_grade(github, title, grade)
+
+    return redirect('/project/' + title)
+
+
 @app.route('/project/<title>')
 def show_project(title):
     """Show the information about specific projects"""
@@ -73,6 +118,7 @@ def show_project(title):
     return render_template('project-info.html',
                             project_info=project_info,
                             student_grades=student_grades)
+
 
 
 

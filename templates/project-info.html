@@ -6,8 +6,11 @@
 <body>
     <h1>{{ project_info[0] }}</h1>
     <p>project_details: {{ project_info[1] }}</p>
-    <p>Max Grade : {{ project_info[2] }}</p>student_grades
+    <p>Max Grade : {{ project_info[2] }}</p>
 
+
+
+    {% if student_grades != [] %}
     <div>
     <h2>Students' project grades</h2>
 
@@ -19,6 +22,10 @@
     <ul> Grade: {{ grade }} </ul>
     {% endfor %}
     </div>
+
+    {% endif %}
+
+
 
 </body>
 </html>
