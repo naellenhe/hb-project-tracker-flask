@@ -6,9 +6,9 @@
 <body>
     <h1>{{ first }} {{ last }}</h1>
     <p>GitHub Account: {{ github }}</p>
-    {% for grade in grades %}
-    <ul> Project name: <a href='/project/{{grade[0]}}'>{{grade[0]}} </a></ul>
-    <ul> Project grade {{grade[1]}}</ul>
+    {% for title, grade in grades %}
+    <ul> Project name: <a href='/project/{{title}}'>{{title}} </a></ul>
+    <ul> Project grade {{grade}}</ul>
 
     {% endfor %}
 </body>
